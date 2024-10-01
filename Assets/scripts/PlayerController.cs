@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlyerController : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -13,7 +13,8 @@ public class PlyerController : MonoBehaviour
     // Update is called once per frame
     public float horizontalInput;
     public float speed = 10.0f;
-    public float xRange = 10;
+    public float xRange = 54;
+    public GameObject projectilePrefab;
 
     void Update()
     {
@@ -29,5 +30,11 @@ public class PlyerController : MonoBehaviour
         }
         horizontalInput = Input.GetAxis("Horizontal");
         transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * speed);
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            //Launch a projectile from the player
+            Instantiate(projectilePrefab, transform.position,projectilePrefab.transform.rotation);
+        }
     }
 }
